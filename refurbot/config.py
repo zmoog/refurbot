@@ -1,0 +1,8 @@
+import os
+
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
+
+TWITTER_API_KEY = os.environ.get("TWITTER_API_KEY")
+TWITTER_API_SECRET = os.environ.get("TWITTER_API_SECRET")
+TWITTER_ACCESS_KEY = os.environ.get("TWITTER_ACCESS_KEY")
+TWITTER_ACCESS_SECRET = os.environ.get("TWITTER_ACCESS_SECRET")

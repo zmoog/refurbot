@@ -1,0 +1,26 @@
+{
+  "name": "refurbot",
+  "version": "0.1.0",
+  "description": "A serverless bot that tweets the best refurnished product deals from the Apple",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmoog/refurbot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zmoog/refurbot/issues"
+  },
+  "homepage": "https://github.com/zmoog/refurbot#readme",
+  "dependencies": {
+    "serverless": "^2.23.0"
+  },
+  "devDependencies": {
+    "serverless-python-requirements": "^5.1.0"
+  }
+}
