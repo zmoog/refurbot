@@ -1,14 +1,14 @@
-from typing import Generator
+from typing import List
 
 from refurbished import Store
 from refurbished.parser import Product
 
 
 class RefurbishedStoreAdapter:
-    def search(self, country: str, product: str) -> Generator[Product, None, None]:
+    def search(self, country: str, product: str) -> List[Product]:
         store = Store(country)
 
-        products: Generator[Product, None, None]
+        products: List[Product]
         if product == 'ipad':
             products = store.get_ipads()
         elif product == 'iphone':
@@ -20,7 +20,7 @@ class RefurbishedStoreAdapter:
                 f"'{product}'' is not yet supported by this adapter"
             )
 
-        return products
+        return list(products)
 
 class ProductNotSupported(Exception):
     pass
