@@ -130,3 +130,7 @@ dmypy.json
 
 # Serverless
 node_modules
+
+# Local only
+setenv*.sh
+.serverless
