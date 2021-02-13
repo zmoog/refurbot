@@ -1,7 +1,12 @@
+import logging
+
 from typing import Any, Callable, Dict, List, Type
 
 from refurbot.domain import commands, events
 from refurbot.services import unit_of_work
+from refurbot.services.handlers import no_op
+
+logger = logging.getLogger(__name__)
 
 
 class MessageBus:
@@ -16,7 +21,7 @@ class MessageBus:
         self.command_handlers = command_handlers
         self.uow = uow
 
-    def handle(self, message, context: Dict[str, Any]):
+    def handle(self, message, context: Dict[str, Any] = {}):
         self.queue = [message]
 
         while self.queue:
@@ -31,7 +36,7 @@ class MessageBus:
         event: events.Event,
         context: Dict[str, Any],
     ):
-        for handler in self.event_handlers[type(event)]:
+        for handler in self.event_handlers.get(type(event), [no_op]):
             handler(event, self.uow, context)
 
     def _handle_command(
@@ -40,6 +45,9 @@ class MessageBus:
         commands.Command,
         context: Dict[str, Any],
     ):
-        handler = self.command_handlers[type(command)]
+        if type(command) not in self.command_handlers:
+            raise Exception(f"No handler for command {command}")
+
+        handler = self.command_handlers.get(type(command))
         events = handler(command, self.uow, context)
         self.queue.extend(events)
