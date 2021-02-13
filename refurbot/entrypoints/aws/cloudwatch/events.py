@@ -22,4 +22,4 @@ def run_scheduled(event: Dict, config: Any):
         product='mac'
     )
 
-    messagebus.handle(cmd, {})
+    messagebus.handle(cmd)

@@ -33,7 +33,7 @@ def test_tweet_deals(mocker,
     #
     # Run the command
     #
-    messagebus.handle(commands.SearchDeals("it", "mac"), {})
+    messagebus.handle(commands.SearchDeals("it", "mac"))
 
     #
     # Verify the result
@@ -75,7 +75,7 @@ def test_deals_not_found(mocker,
     #
     # Run the command
     #
-    messagebus.handle(commands.SearchDeals("it", "mac"), {})
+    messagebus.handle(commands.SearchDeals("it", "mac"))
 
     #
     # Verify the result

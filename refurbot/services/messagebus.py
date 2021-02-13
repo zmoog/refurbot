@@ -21,7 +21,7 @@ class MessageBus:
         self.command_handlers = command_handlers
         self.uow = uow
 
-    def handle(self, message, context: Dict[str, Any]):
+    def handle(self, message, context: Dict[str, Any] = {}):
         self.queue = [message]
 
         while self.queue:
