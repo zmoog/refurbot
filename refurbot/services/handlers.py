@@ -34,6 +34,16 @@ def search_deals(
         )]
 
 
+#
+# Event handlers
+#
+def no_op(
+    event: events.Event,
+    _: UnitOfWork,
+    context: Dict[str, Any] = {}):
+
+    print(f"No handler was associated to the {event} event.")
+
 
 #
 # Event handlers
@@ -42,7 +52,7 @@ def tweet_deals(
     event: events.DealsFound,
     uow: UnitOfWork,
     context: Dict[str, Any]):
-    
+
     with uow:
         text = f"""Hey, here's the best deal I could found today for the {event.product} in the {event.country} store:
 

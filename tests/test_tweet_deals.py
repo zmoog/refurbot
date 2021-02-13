@@ -11,7 +11,6 @@ def test_tweet_deals(mocker,
                      messagebus: MessageBus,
                      refurbished_adapter: apple.RefurbishedStoreAdapter,
                      twitter_adapter: twitter.TwitterAdapter):
-    
     #
     # patch refurbished store adapter
     #
@@ -51,4 +50,34 @@ https://t.co/2MgYackLWP?amp=1
 
     twitter_adapter.update_status.assert_called_once_with(
         twitter_status
-    )    
+    )
+
+
+def test_deals_not_found(mocker,
+                         messagebus: MessageBus,
+                         refurbished_adapter: apple.RefurbishedStoreAdapter,
+                         twitter_adapter: twitter.TwitterAdapter):
+
+    #
+    # patch refurbished store adapter
+    #
+    mocker.patch.object(refurbished_adapter, "search")
+    refurbished_adapter.search.side_effect = [
+        []  # no deals for this product today ¯\_(ツ)_/¯
+    ]
+
+    #
+    # patch twitter adapter
+    #
+    mocker.patch.object(twitter_adapter, 'update_status')
+    twitter_adapter.update_status.side_effect = [None]
+
+    #
+    # Run the command
+    #
+    messagebus.handle(commands.SearchDeals("it", "mac"), {})
+
+    #
+    # Verify the result
+    #
+    twitter_adapter.update_status.assert_not_called()
