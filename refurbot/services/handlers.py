@@ -1,17 +1,19 @@
+import logging
+
 from typing import Any, Dict, List
 
 from refurbot.domain import commands, events
 from refurbot.services.unit_of_work import UnitOfWork
 
+logger = logging.getLogger(__name__)
+
 
 #
 # Command handlers
 #
-
-def search_deals(
-    cmd: commands.SearchDeals,
-    uow: UnitOfWork,
-    context: Dict[str, Any]) -> List[events.Event]:
+def search_deals(cmd: commands.SearchDeals,
+                 uow: UnitOfWork,
+                 _: Dict[str, Any]) -> List[events.Event]:
 
     with uow:
         deals = uow.refurbished_store.search(cmd.country, cmd.product)
@@ -22,7 +24,7 @@ def search_deals(
                 product=cmd.product,
             )]
 
-        # get the deal, arbitrarily defined as the one with the 
+        # get the deal, arbitrarily defined as the one with the
         # max saving percentage
         the_best_deal = max(deals, key=lambda deal: deal.saving_percentage)
 
@@ -37,21 +39,18 @@ def search_deals(
 #
 # Event handlers
 #
-def no_op(
-    event: events.Event,
-    _: UnitOfWork,
-    context: Dict[str, Any] = {}):
-
-    print(f"No handler was associated to the {event} event.")
+def no_op(event: events.Event,
+          uow: UnitOfWork,
+          context: Dict[str, Any] = {}):
+    logger.warning(f"No business handler was associated to the {event} event.")
 
 
 #
 # Event handlers
 #
-def tweet_deals(
-    event: events.DealsFound,
-    uow: UnitOfWork,
-    context: Dict[str, Any]):
+def tweet_deals(event: events.DealsFound,
+                uow: UnitOfWork,
+                context: Dict[str, Any]):
 
     with uow:
         text = f"""Hey, here's the best deal I could found today for the {event.product} in the {event.country} store:

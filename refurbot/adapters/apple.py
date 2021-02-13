@@ -22,5 +22,6 @@ class RefurbishedStoreAdapter:
 
         return list(products)
 
+
 class ProductNotSupported(Exception):
     pass
