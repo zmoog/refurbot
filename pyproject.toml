@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "refurbot"
-version = "0.1.0"
+version = "0.1.1"
 description = "A serverless bot that tweets the best refurnished product deals from the Apple"
 authors = ["Maurizio branca <maurizio.branca@gmail.com>"]
 license = "MIT"
