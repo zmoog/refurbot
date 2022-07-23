@@ -6,9 +6,9 @@ from refurbished.parser import Product
 
 class RefurbishedStoreAdapter:
     def search(self, country: str, product: str) -> List[Product]:
+        products: List[Product]
         store = Store(country)
 
-        products: List[Product]
         if product == 'ipad':
             products = store.get_ipads()
         elif product == 'iphone':

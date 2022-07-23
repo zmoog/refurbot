@@ -42,7 +42,7 @@ def search_deals(cmd: commands.SearchDeals,
 def no_op(event: events.Event,
           uow: UnitOfWork,
           context: Dict[str, Any] = {}):
-    logger.warning(f"No business handler was associated to the {event} event.")
+    logger.warning(f"Ooops! I don't know how to handle this event: {event}.")
 
 
 #
