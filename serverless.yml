@@ -75,7 +75,7 @@ custom:
 functions:
   run-scheduled:
     handler: refurbot/entrypoints/aws/cloudwatch/events.run_scheduled
-    timeout: 10 # sometimes the Apple's refurbished store hangs for a few seconds.
+    timeout: 20 # sometimes the Apple's refurbished store hangs for a few seconds.
     events:
       - schedule:
           name: ${self:service}-${opt:stage, self:provider.stage}-run-scheduled
