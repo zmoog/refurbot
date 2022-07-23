@@ -8,9 +8,9 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.9"
 tweepy = "^3.10.0"
-refurbished = "^0.5.0"
-click = "^7.1.2"
 pytest-mock = "^3.5.1"
+click = "8.0.4"
+refurbished = "^0.8.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"

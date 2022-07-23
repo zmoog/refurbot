@@ -17,7 +17,8 @@ def test_tweet_deals(mocker,
     mocker.patch.object(refurbished_adapter, "search")
     refurbished_adapter.search.side_effect = [
         [Product(name='MacBook Pro 13,3" ricondizionato con Intel Core i5 quad-core a 2,4GHz e display Retina - Argento',
-                 url="https://t.co/2MgYackLWP?amp=1",
+                 family='mac',
+                 url="https://www.apple.com/it/shop/product/FR7K2TY/A/Refurbished-iPad-Wi-Fi-128GB-Silver-6th-Generation",
                  price=Decimal(1979.00),
                  previous_price=Decimal(1679.00),
                  savings_price=300,
@@ -45,7 +46,7 @@ MacBook Pro 13,3" ricondizionato con Intel Core i5 is now at 1979 instead of 167
 You're saving 300 — it's 18% OFF.
 
 Learn more visiting:
-https://t.co/2MgYackLWP?amp=1
+https://www.apple.com/it/shop/product/FR7K2TY/A/Refurbished-iPad-Wi-Fi-128GB-Silver-6th-Generation
 """
 
     twitter_adapter.update_status.assert_called_once_with(
