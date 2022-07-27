@@ -18,14 +18,13 @@ service: refurbot
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
-frameworkVersion: '2'
+frameworkVersion: '3'
 
 plugins:
   - serverless-python-requirements
 provider:
   name: aws
   runtime: python3.8
-  lambdaHashingVersion: 20201221
   logRetentionInDays: 30
 
 # you can overwrite defaults here
@@ -62,11 +61,14 @@ provider:
 #    - exclude-me-dir/**
 # you can add packaging information here
 package:
- include:
-   - refurbot/**
- exclude:
-   - "**"
- individually: true
+  patterns:
+    - '!node_modules'
+    - '!venv'
+    - '!tests'
+    - '!.pytest_cache'
+    - '!_pytest/**'
+    - 'refurbot/**'
+  individually: true
 
 custom:
   pythonRequirements:

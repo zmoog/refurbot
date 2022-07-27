@@ -8,14 +8,13 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.9"
 tweepy = "^3.10.0"
-pytest-mock = "^3.5.1"
 click = "8.0.4"
 refurbished = "^0.8.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.2"
 flake8 = "^3.8.4"
 pytest-mock = "^3.5.1"
+pytest = "^7.1.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
